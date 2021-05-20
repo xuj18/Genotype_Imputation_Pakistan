@@ -1,5 +1,10 @@
 ### main purpose: run the MoChA pipeline on Google cloud for genotype calling (i.e., from Illumina .idat data to genotype calls)
+
+
 ## MoChA pipeline reference: https://github.com/freeseek/mocha/tree/master/wdl (developed by Giulio Genovese)
+## All the codes below related to the Google Cloud, Cromwell, and MoChA are copied from Giulio's MoChA pipeline (link shown above)
+## Only codes specific to the Pakistani samples are created by Jiayi Xu 
+
 
 #Initialize your Google Cloud configuration:
 
@@ -276,7 +281,6 @@ sudo mysql --user=root --password=cromwell --execute "CREATE DATABASE cromwell"
 curl https://raw.githubusercontent.com/freeseek/mocha/master/wdl/mocha.wdl -o mocha.wdl
 
 
-
 #Create an options.json file for Cromwell that should look like this:
 # example:
 {
@@ -346,8 +350,6 @@ curl https://raw.githubusercontent.com/freeseek/mocha/master/wdl/mocha.wdl -o mo
   "mocha.sample_tsv_file": "gs://bigdeli-working/pakistan/samples/pakistan_gsa.sample.tsv"
 }
 
-#to start the cromwell server on google VM
-(java -XX:MaxRAMPercentage=90 -Dconfig.file=PAPIv2.conf -jar cromwell-58.jar server &)
 
 #Now it would be a good time to test whether the configuration worked well. Edit and generate the following hello.wdl workflow file:
 
@@ -369,6 +371,9 @@ task myTask {
   }
 }
 
+
+#to start the cromwell server on google VM
+(java -XX:MaxRAMPercentage=90 -Dconfig.file=PAPIv2.conf -jar cromwell-58.jar server &)
 
 # Submit the testing workflow to the Cromwell server:
 java -jar cromwell-58.jar submit hello.wdl
@@ -422,7 +427,8 @@ curl -X POST http://localhost:8000/api/workflows/v1/{id}/abort | jq
 #If you want to clean temporary files and log files, after you have properly moved all the output files you need, 
 #you can delete the workflow executions directory defined as root in the PAPIv2.conf configuration file.
 
-gsutil -m rm -r gs://{google-bucket}/cromwell/cromwell-executions
+gsutil -m rm -r gs://bigdeli-working/pakistan/cromwell/cromwell-executions
+
 
 #Notice that either flushing the metadata from the database or removing the workflow executions files will invalidate the cache from previously run tasks
 
