@@ -402,6 +402,7 @@ java -jar womtool-58.jar validate mocha.wdl -i {sample-set-id}.json
 #to submit a job for the real data
 java -jar cromwell-58.jar submit mocha.wdl -i pakistan_gsa.json -o options.json
 
+#message received: workflow 170cfe7f-d3cb-4933-bb2f-206fc8e309c0 submitted
 
 #To monitor the status of jobs submitted to the server, you can use:
 curl -X GET http://localhost:8000/api/workflows/v1/query | jq
@@ -412,7 +413,7 @@ curl -X GET http://localhost:8000/api/workflows/v1/{id}/metadata | jq
 #id example: 0a43e93f-f1ab-4987-a514-23ceeadf02a2
 
 #example:
-curl -X GET http://localhost:8000/api/workflows/v1/387e0eda-0a46-4921-a6ac-ef12dd5dbe9f/metadata | jq
+curl -X GET http://localhost:8000/api/workflows/v1/170cfe7f-d3cb-4933-bb2f-206fc8e309c0/metadata | jq
 
 # how to save the workflow status in a .json file
 curl -X GET http://localhost:8000/api/workflows/v1/387e0eda-0a46-4921-a6ac-ef12dd5dbe9f/metadata > 387e0eda-0a46-4921-a6ac-ef12dd5dbe9f.metadata.json
