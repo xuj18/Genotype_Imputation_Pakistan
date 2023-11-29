@@ -313,10 +313,6 @@ plink --bfile pakistan_gsa_QC1 --extract paut.prune.in --chr 1-22 --homozyg
 long_roh <- read.table("plink.hom",head=T)
 ind_roh <- read.table("plink.hom.indiv",head=T)
 
-test_1_ind <- long_roh[which(long_roh$FID=="8019997143" & long_roh$IID=="8019997143"),] # 28 ROHs
-dim(test_1_ind)
-# 28 13
-
 sum(test_1_ind$KB) #  210425.9, consistent with the first line in plink.hom.indiv: NSEG=28, KB= 210426
 head(ind_roh)
 
@@ -498,9 +494,6 @@ rep_sex <- ayub[,c("Sema4.MatrixTubeBarcode","Sema4.MatrixTubeBarcode","reported
 
 # remove 2 duplicated IDs
 rep_sex[duplicated(rep_sex[,1]),]
-# 8019998579
-# 8019998591
-rep_sex[which(rep_sex[,1] %in% c("8019998579","8019998591")),]
 
 dedup_rep_sex <- rep_sex[!duplicated(rep_sex[,1]),] # 2634 IDs
 
@@ -897,8 +890,6 @@ vcftools --gzvcf pakistan_gsa.vcf.gz --snps pakistan_gsa_removed_SNPs_wo_chrX.ts
 
 # sample.tsv 
 # sample_id	computed_gender	call_rate
-# 8019997143	M	0.999263
-# 8019997155	F	0.992587
 
 # options_1814_gsa_phasing.json
 {
@@ -4988,9 +4979,6 @@ bcftools concat -o all_snp_overlap_tarseq.vcf  chr*.tarseq.forward.1748.recode.v
 # in Genome Asia, there is 0 SNPs for each chromosome in the reverse files (chr*.tarseq.reverse.1748.recode.vcf)
 
 grep -v '^#' all_snp_overlap_tarseq.vcf|wc -l
-# in GA file
-# ID order:  8019997143	 8019997155 	8019997167
-# SNP order: 10:21074591:A:C, 10:21074724:T:C	
 
 
 # merge manually (this does not work because it seems that the vcf header has to follow certain order to be recognized as vcf, but by sorting, it changes the vcf header order)
@@ -5005,8 +4993,6 @@ grep -v '^#' all_snp_overlap_tarseq.vcf|wc -l
 # reorder the vcf to the Participant ID order in keep_1748_samples
 ml bcftools
 bcftools view -S /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/Pakistani_GSA_impute/targeted_seq_data/keep_1748_samples all_snp_overlap_tarseq.vcf -o all_snp_overlap_tarseq_ordered.vcf
-# 48 headers
-# ID order: 8019997380	8019999483	8019998836
 
 # reorder the vcf so the SNP order starts at chromosome 1
 ml vcftools 
@@ -5832,12 +5818,6 @@ cor(rare_r2$est_R2, rare_r2$true_R2 )
 plot(rare_r2$est_R2, rare_r2$true_R2 , xlab = "Estimated R Square", ylab = "True R Square", pch=20, frame = FALSE)
 abline(lm(true_R2 ~ est_R2 , data = rare_r2), col = "red", lwd=2)
 
-# meta-imputation chr1 file
-# CHROM	POS			ID						REF		ALT		QUAL	FILTER	INFO													FORMAT		8019997380	8019999483	8019998836
-# chr1	10258305	chr1:10258305:AGT:A		A		AGT		.		PASS	NST=1;S2;AF=2e-05;MAF=2e-05;R2=0.00182;AC=0;AN=3496	 	GT:DS:HDS	0|0:0:0,0	0|0:0:0,0	0|0:0:0,0
-# tarseq
-# CHROM	POS			ID						REF		ALT 	QUAL	FILTER	INFO													FORMAT		8019997380	8019999483	8019998836
-# chr1	10258305	1:10318363:A:AGT	    AGT		A		.		.		PR														GT			0/0			0/0			0/0
 
 
 # meta-imputation: 33 flipped SNPs
@@ -7678,9 +7658,6 @@ TOPMed_1000G     0.05104
 ml git python
 ml cmake
 /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/aggRSquare/release-build/aggRSquare -v /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/Pakistani_GSA_impute/targeted_seq_data/Pakistani_1748_tarSeq.v4.2.updateID.sort.recode.vcf -i /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/Pakistani_GSA_impute/gsa_1814_mocha_GA/all_snp_overlap_tarseq_ordered.sort.vcf -o tarseq_GA_grch37  --bins /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/Pakistani_GSA_impute/gsa_1814_compare/aggRSquare/default_MAF_bins --detail
-# tarseq data have 28 headers
-# tarseq ID order: 	8019997380	8019999483	8019998836
-# tarseq SNP order: 1:6166311:A:G 1:6166332:A:G
 
 
 ### meta-imputation
@@ -7961,8 +7938,6 @@ comm -12 <(sort /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folder
 # 1 overlap variants when the alleles are flipped
 
 # check the Rsq manually
-# SNP.ID	   Allele.Frequency	No.Samples	Imputation.R2	Validation.AF	Imputation.AF
-chr1:6110293:C:T	0.170690	1740	0.927241	0.170690	0.159015
 
 grep 6110293 /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/Pakistani_GSA_impute/targeted_seq_data/Pakistani_1748_tarSeq.GRCh38.chr1.recode.vcf > tarseq_chr1_6110293
 awk '(NR==464){print $0}' /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/Pakistani_GSA_impute/targeted_seq_data/Pakistani_1748_tarSeq.GRCh38.chr1.recode.vcf > tarseq_header
@@ -8011,8 +7986,6 @@ cor(as.numeric(merge_tarseq_ex1000G$geno),as.numeric(merge_tarseq_ex1000G$DS), m
 
 
 ### check a second SNP
-# SNP.ID	   Allele.Frequency	No.Samples	Imputation.R2	Validation.AF	Imputation.AF
-chr1:6106575:C:T	0.000286	1746	0.000002	0.000286	0.000551
 
 grep 6106575 /sc/arion/projects/psychgen/HUCKINS_LAB_DONT_DELETE/jiayi_folders/Pakistani_GSA_impute/targeted_seq_data/Pakistani_1748_tarSeq.GRCh38.chr1.recode.vcf > tarseq_chr1_6106575
 cat tarseq_header tarseq_chr1_6106575 > tarseq_chr1_6106575_header # manually removed the # sign
@@ -8058,9 +8031,6 @@ cor(as.numeric(merge_tarseq_ex1000G$geno),as.numeric(merge_tarseq_ex1000G$DS), m
 # squared pearson = -0.001358449 * -0.001358449 = 1.845384e-06 ~ 0.000002  (matched with the Imputation.R2 value)
 
 # yes the R2 calculation are correct in aggRSquare (some minor deviation from manual calculation)
-SNP.ID	   Allele.Frequency	No.Samples	Imputation.R2	Validation.AF	Imputation.AF (manual.R2.calculation.using.cor)
-chr1:6106575:C:T	0.000286	1746	0.000002	0.000286	0.000551 (-0.001358449)
-chr1:6110293:C:T	0.170690	1740	0.927241	0.170690	0.159015 (0.9629336)
 
 ##################################################
 ########      plot the true Rsq by MAF   #########
