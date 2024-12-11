@@ -26,7 +26,7 @@ This file contains the R script to classify SNPs into biallelic variant versus m
 
 7. mocha_idat_to_vcf.sh
 
-This file contains the Google Cloud script to covert Illumina idat files to vcf files for the genotype data using the MoChA pipeline (https://github.com/freeseek/mochawdl).
+This file contains the Google Cloud script to convert Illumina idat files to vcf files for the genotype data using the MoChA pipeline (https://github.com/freeseek/mochawdl).
 
 8. plot_Rsq_by_MAF.sh
 
