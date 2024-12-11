@@ -6,5 +6,5 @@ This spreadsheet includes the imputation accuracy represented by different types
 
 
 # Citation
-Xu J, Liu D, Hassan A, Genovese G, Cote AC, Fennessy B, Cheng E, Charney AW, Knowles JA, Ayub M, Peterson RE, Bigdeli TB, Huckins LM. Evaluation of imputation performance of multiple reference panels in a Pakistani population. Human Genetics and Genomics Advances 2024 (in print).
+1. Xu J, Liu D, Hassan A, Genovese G, Cote AC, Fennessy B, Cheng E, Charney AW, Knowles JA, Ayub M, Peterson RE, Bigdeli TB, Huckins LM. Evaluation of imputation performance of multiple reference panels in a Pakistani population. Human Genetics and Genomics Advances 2024 (in print).
    
