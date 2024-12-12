@@ -1,5 +1,5 @@
 ################################################################################################################
-####               Google cloud script:  Convert genotype density file to vcf on Google Cloud               ####
+####               Google cloud script:  Convert genotype density file to bcf on Google Cloud               ####
 ################################################################################################################
 
 ## 1. Convert .idat to .bcf using the MoChA pipeline on Google Cloud 
