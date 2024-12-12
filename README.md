@@ -38,7 +38,7 @@ This file contains the R script to count and plot the SNP counts.
 
 10. snp_annotation.sh
 
-This file contains the shell script to annotate the SNPs with different variant type (e.g., introns, extrons, missense).
+This file contains the shell script to annotate the SNPs with different variant types (e.g., introns, extrons, missense).
 
 
 # Citation
