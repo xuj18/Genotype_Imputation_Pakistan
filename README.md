@@ -1,3 +1,6 @@
+# Overview of the manuscript
+Genetic imputation is a major contributor to current GWAS studies. However, the performance of publicly available imputation panels in South Asian individuals is rarely studied. In this study, we found meta-imputation of TOPMed and the expanded 1000 Genomes (ex1000G) performs the best for accuracy and coverage in a Pakistani population, with ex1000G outperforming TOPMed for imputation of common variants despite its 30-fold smaller sample size, suggesting the importance of including diverse samples in future imputation reference panels. 
+
 # File Dictionary
 
 1. R2_and_wilcox_test_statistics.xlsx
