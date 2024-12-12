@@ -2,9 +2,6 @@
 ########             shell script on HPC:  SNP annotation using snpEff              #########
 #############################################################################################
 
-
-#snpeff located at /hpc/users/xuj24/snpeff/snpEff/snpEff.jar
-
 java -jar snpEff.jar
 
 #Once SnpEff is installed, we will enter the following commands to download the pre-built human database (GRCh37.75) that will be used to annotate our data.
